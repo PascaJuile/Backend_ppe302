@@ -14,7 +14,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Permettre tous les chemins d'accès
-                        .allowedOrigins("http://localhost:8081") // Origine de votre application Vue.js
+                        .allowedOrigins("http://localhost:8082") // Origine de votre application Vue.js
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Méthodes HTTP autorisées
                         .allowedHeaders("*") // Tous les en-têtes autorisés
                         .allowCredentials(true); // Autoriser les cookies si nécessaire

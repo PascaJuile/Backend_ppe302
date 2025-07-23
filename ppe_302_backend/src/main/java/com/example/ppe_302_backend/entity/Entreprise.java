@@ -6,8 +6,10 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Entreprise {
 
     @Id
@@ -21,6 +23,7 @@ public class Entreprise {
     private String email;
     private String siteWeb;
     private String logoUrl;
+    private String localisation;
 
     @ManyToOne
     @JoinColumn(name = "prestataire_id")
@@ -33,4 +36,13 @@ public class Entreprise {
     @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<ImageEntreprise> images;
+
+    @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
+    @JsonManagedReference("entreprise-disponibilites")
+    private List<DisponibiliteEntreprise> disponibilites;
+
+    @OneToMany(mappedBy = "entreprise")
+    @JsonManagedReference
+    private List<DocumentEntreprise> documents;
+
 }

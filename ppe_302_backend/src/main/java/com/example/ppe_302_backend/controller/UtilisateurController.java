@@ -71,6 +71,13 @@ public class UtilisateurController {
         return ResponseEntity.ok(new LoginResponse(token, utilisateur.getRole()));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout() {
+        // Pas de vraie action car le JWT est stateless
+        return ResponseEntity.ok("Déconnecté avec succès.");
+    }
+
+
     // ✅ Obtenir utilisateur par email
     @GetMapping("/{email}")
     public ResponseEntity<?> getUtilisateurByEmail(@PathVariable String email) {

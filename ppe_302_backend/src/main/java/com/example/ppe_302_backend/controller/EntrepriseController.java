@@ -75,5 +75,20 @@ public class EntrepriseController {
         imageEntrepriseRepository.deleteById(id);
         return ResponseEntity.ok("Image supprimée.");
     }
+    @GetMapping
+    public ResponseEntity<?> getAllEntreprises() {
+        List<Entreprise> entreprises = entrepriseService.getAllEntreprises();
+        return ResponseEntity.ok(entreprises);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getEntrepriseById(@PathVariable Long id) {
+        Optional<Entreprise> entreprise = entrepriseService.getEntrepriseById(id);
+        if (entreprise.isPresent()) {
+            return ResponseEntity.ok(entreprise.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }

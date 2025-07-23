@@ -4,11 +4,14 @@ import com.example.ppe_302_backend.dto.EntrepriseRequest;
 import com.example.ppe_302_backend.entity.*;
 import com.example.ppe_302_backend.repository.*;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -112,6 +115,13 @@ public class EntrepriseService {
         }
 
         return entreprise;
+    }
+    public List<Entreprise> getAllEntreprises() {
+        return entrepriseRepository.findAll();
+    }
+
+    public Optional<Entreprise> getEntrepriseById(Long id) {
+        return entrepriseRepository.findById(id);
     }
 
 }
