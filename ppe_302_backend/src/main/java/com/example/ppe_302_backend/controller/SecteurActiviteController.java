@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/secteurs")
-@CrossOrigin(origins = "http://localhost:8082")  // Autorise le front
+@CrossOrigin(origins = "http://localhost:8080")  // Autorise le front
 public class SecteurActiviteController {
 
     @Autowired

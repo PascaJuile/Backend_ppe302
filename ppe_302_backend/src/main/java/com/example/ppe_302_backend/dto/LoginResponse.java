@@ -1,5 +1,6 @@
 package com.example.ppe_302_backend.dto;
 
+import com.example.ppe_302_backend.entity.Utilisateur;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,4 +9,5 @@ import lombok.Data;
 public class LoginResponse {
     private String token;
     private String role;
+    private Utilisateur user;
 }

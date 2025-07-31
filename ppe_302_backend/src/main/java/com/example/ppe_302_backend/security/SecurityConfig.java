@@ -35,7 +35,7 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Toutes les routes
-                        .allowedOrigins("http://localhost:8082") // Autorise le frontend Vue
+                        .allowedOrigins("http://localhost:8080") // Autorise le frontend Vue
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);

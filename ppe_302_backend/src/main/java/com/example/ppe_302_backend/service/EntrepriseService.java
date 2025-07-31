@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,7 @@ public class EntrepriseService {
     private final ImageEntrepriseRepository imageEntrepriseRepository;
     private final ImageStorageService imageStorageService;
     private final SecteurActiviteRepository secteurActiviteRepository;
+    private final DisponibiliteEntrepriseRepository disponibiliteRepository; // ✅ Ajoute cette ligne
 
     public Entreprise creerEntreprise(EntrepriseRequest request, MultipartFile[] images, MultipartFile logoFile) {
         Utilisateur prestataire = utilisateurRepository.findByEmail(request.getPrestataireEmail())
@@ -118,6 +120,15 @@ public class EntrepriseService {
     }
     public List<Entreprise> getAllEntreprises() {
         return entrepriseRepository.findAll();
+    }
+
+    public List<DisponibiliteEntreprise> getDisponibilitesByEntreprise(Long entrepriseId) {
+        Optional<Entreprise> entrepriseOpt = entrepriseRepository.findById(entrepriseId);
+        if (entrepriseOpt.isEmpty()) {
+            return Collections.emptyList();
+        }
+        Entreprise entreprise = entrepriseOpt.get();
+        return disponibiliteRepository.findByEntreprise(entreprise); // assure-toi que ce repository existe
     }
 
     public Optional<Entreprise> getEntrepriseById(Long id) {

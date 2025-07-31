@@ -1,6 +1,7 @@
 package com.example.ppe_302_backend.controller;
 
 import com.example.ppe_302_backend.dto.EntrepriseRequest;
+import com.example.ppe_302_backend.entity.DisponibiliteEntreprise;
 import com.example.ppe_302_backend.entity.Entreprise;
 import com.example.ppe_302_backend.entity.Utilisateur;
 import com.example.ppe_302_backend.repository.ImageEntrepriseRepository;
@@ -19,7 +20,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/entreprises")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:8082")
+@CrossOrigin(origins = "http://localhost:8080")
 public class EntrepriseController {
 
     private final EntrepriseService entrepriseService;
@@ -88,6 +89,12 @@ public class EntrepriseController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/{id}/disponibilites")
+    public ResponseEntity<?> getDisponibilitesByEntreprise(@PathVariable Long id) {
+        List<DisponibiliteEntreprise> disponibilites = entrepriseService.getDisponibilitesByEntreprise(id);
+        return ResponseEntity.ok(disponibilites);
     }
 
 

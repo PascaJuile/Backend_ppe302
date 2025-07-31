@@ -2,6 +2,8 @@ package com.example.ppe_302_backend.entity;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,4 +18,8 @@ public class Prestataire extends Utilisateur{
     @ElementCollection
     private List<String> competences;
     private String disponibilite;
+
+    @ManyToOne
+    @JoinColumn(name = "entreprise_id")
+    private Entreprise entreprise;
 }

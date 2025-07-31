@@ -10,5 +10,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Client extends Utilisateur {
-    // Ajoute ici des champs spécifiques au client si nécessaire plus tard
+    private String telephone;
+    private String adresse;
 }

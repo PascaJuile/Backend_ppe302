@@ -3,6 +3,8 @@ package com.example.ppe_302_backend.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,12 +39,32 @@ public class Entreprise {
     @JsonManagedReference
     private List<ImageEntreprise> images;
 
-    @OneToMany(mappedBy = "entreprise", cascade = CascadeType.ALL)
-    @JsonManagedReference("entreprise-disponibilites")
-    private List<DisponibiliteEntreprise> disponibilites;
-
     @OneToMany(mappedBy = "entreprise")
     @JsonManagedReference
     private List<DocumentEntreprise> documents;
+
+    @OneToMany(mappedBy = "entreprise")
+    @JsonManagedReference
+    private List<RendezVous> rendezVous;
+
+    @OneToMany(
+            mappedBy = "entreprise",
+            cascade = CascadeType.ALL,     // propage persist/merge/remove
+            orphanRemoval = true,          // supprime la dispo si retirée de la collection
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference("entreprise-disponibilites")
+    private List<DisponibiliteEntreprise> disponibilites = new ArrayList<>();
+
+    // helpers pour garantir la cohérence
+    public void addDisponibilite(DisponibiliteEntreprise d) {
+        disponibilites.add(d);
+        d.setEntreprise(this);
+    }
+
+    public void removeDisponibilite(DisponibiliteEntreprise d) {
+        disponibilites.remove(d);
+        d.setEntreprise(null);
+    }
 
 }
